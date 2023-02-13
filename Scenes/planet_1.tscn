@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw55is28vau23"]
+
+[ext_resource type="PackedScene" uid="uid://bbr64dvuas5y6" path="res://Resources/Planet_1.glb" id="1_s8igd"]
+[ext_resource type="PackedScene" uid="uid://dgw81euidt52y" path="res://Scenes/encironment.tscn" id="2_h12hg"]
+
+[node name="Planet_1" instance=ExtResource("1_s8igd")]
+
+[node name="Encironment" parent="." index="1" instance=ExtResource("2_h12hg")]
