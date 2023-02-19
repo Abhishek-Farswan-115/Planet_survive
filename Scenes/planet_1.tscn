@@ -1,8 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://bw55is28vau23"]
+[gd_scene load_steps=5 format=3 uid="uid://bw55is28vau23"]
 
 [ext_resource type="PackedScene" uid="uid://bbr64dvuas5y6" path="res://Resources/Planet_1.glb" id="1_s8igd"]
 [ext_resource type="PackedScene" uid="uid://dgw81euidt52y" path="res://Scenes/encironment.tscn" id="2_h12hg"]
+[ext_resource type="Script" path="res://Scenes/planet_1.gd" id="2_jp45o"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s8cdp"]
+radius = 5.43486
 
 [node name="Planet_1" instance=ExtResource("1_s8igd")]
+script = ExtResource("2_jp45o")
 
 [node name="Encironment" parent="." index="1" instance=ExtResource("2_h12hg")]
+
+[node name="GravityApply" type="Area3D" parent="." index="2"]
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GravityApply" index="0"]
+shape = SubResource("SphereShape3D_s8cdp")
+
+[connection signal="body_entered" from="GravityApply" to="." method="_on_gravity_apply_body_entered"]
