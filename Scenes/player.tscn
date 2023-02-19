@@ -1,13 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://drrnu5piqrmcp"]
+[gd_scene load_steps=4 format=3 uid="uid://drrnu5piqrmcp"]
+
+[ext_resource type="Script" path="res://Scenes/player.gd" id="1_sfe3v"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_iqa1y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5by1i"]
+radius = 0.0504913
+height = 0.201863
 
-[node name="Player" type="CharacterBody3D"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+[node name="Player" type="RigidBody3D"]
+mass = 100.0
+max_contacts_reported = 1
+contact_monitor = true
+freeze_mode = 1
+script = ExtResource("1_sfe3v")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_iqa1y")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
