@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://byqwopa0vk2e4"]
+
+[ext_resource type="Script" path="res://Scripts/character.gd" id="1_pch8r"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iby4r"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kpq2s"]
+albedo_color = Color(1, 0, 0.0666667, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cnv77"]
+material = SubResource("StandardMaterial3D_kpq2s")
+radius = 0.4
+height = 1.8
+radial_segments = 16
+rings = 4
+
+[sub_resource type="BoxMesh" id="BoxMesh_l6sum"]
+
+[node name="character" type="CharacterBody3D"]
+script = ExtResource("1_pch8r")
+
+[node name="collision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_iby4r")
+
+[node name="orientation" type="Node3D" parent="."]
+
+[node name="mesh" type="MeshInstance3D" parent="orientation"]
+mesh = SubResource("CapsuleMesh_cnv77")
+
+[node name="nose" type="MeshInstance3D" parent="orientation/mesh"]
+transform = Transform3D(0.521643, 0, 0, 0, 0.255686, 0, 0, 0, 0.404853, 0, 0.475177, -0.297246)
+mesh = SubResource("BoxMesh_l6sum")
+
+[node name="camera" type="Node3D" parent="orientation"]
+
+[node name="camera_pitch" type="Node3D" parent="orientation/camera"]
+
+[node name="camera_spring" type="SpringArm3D" parent="orientation/camera/camera_pitch"]
+spring_length = 20.0
+
+[node name="camera" type="Camera3D" parent="orientation/camera/camera_pitch/camera_spring"]
+current = true

@@ -26,5 +26,13 @@ skins/use_named_skins=true
 animation/import=true
 animation/fps=30
 animation/trimming=false
+animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:Planet/Planet/CollisionShape3D": {
+"import/skip_import": true
+}
+}
+}
+gltf/embedded_image_handling=1
