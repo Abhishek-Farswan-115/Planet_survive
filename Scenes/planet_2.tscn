@@ -5,4 +5,4 @@
 
 [node name="Planet_2" instance=ExtResource("1_0a5su")]
 
-[node name="Encironment" parent="." index="2" instance=ExtResource("2_wb0xi")]
+[node name="Encironment" parent="." index="1" instance=ExtResource("2_wb0xi")]
