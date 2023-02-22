@@ -1,13 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bw55is28vau23"]
+[gd_scene load_steps=3 format=3 uid="uid://bw55is28vau23"]
 
 [ext_resource type="PackedScene" uid="uid://bbr64dvuas5y6" path="res://Resources/Planet_1.glb" id="1_s8igd"]
-[ext_resource type="Script" path="res://Scenes/planet_1.gd" id="2_jp45o"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0fkur"]
 radius = 36.0
 
 [node name="Planet_1" instance=ExtResource("1_s8igd")]
-script = ExtResource("2_jp45o")
 
 [node name="collision" type="CollisionShape3D" parent="Planet/Planet" index="0"]
 shape = SubResource("SphereShape3D_0fkur")

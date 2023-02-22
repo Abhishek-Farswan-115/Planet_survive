@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://ckppa41lwfx6d"]
+
+[ext_resource type="Script" path="res://Scripts/planet/planet.gd" id="1_xgdco"]
+[ext_resource type="Script" path="res://Scripts/planet/planet_mesh.gd" id="2_3gxlj"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o2eqs"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nf8ac"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_c3etf"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hrjau"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_w40we"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_1pc5q"]
+
+[node name="planet" type="Node3D"]
+script = ExtResource("1_xgdco")
+
+[node name="up" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_o2eqs")
+script = ExtResource("2_3gxlj")
+normal = Vector3(0, 1, 0)
+
+[node name="down" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_nf8ac")
+script = ExtResource("2_3gxlj")
+normal = Vector3(0, -1, 0)
+
+[node name="left" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_c3etf")
+script = ExtResource("2_3gxlj")
+normal = Vector3(-1, 0, 0)
+
+[node name="right" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_hrjau")
+script = ExtResource("2_3gxlj")
+normal = Vector3(1, 0, 0)
+
+[node name="front" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_w40we")
+script = ExtResource("2_3gxlj")
+normal = Vector3(0, 0, -1)
+
+[node name="back" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_1pc5q")
+script = ExtResource("2_3gxlj")
+normal = Vector3(0, 0, 1)

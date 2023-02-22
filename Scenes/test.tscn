@@ -1,0 +1,75 @@
+[gd_scene load_steps=15 format=3 uid="uid://b3xhbgswg12we"]
+
+[ext_resource type="PackedScene" uid="uid://ckppa41lwfx6d" path="res://Scenes/planet.tscn" id="2_3wnba"]
+[ext_resource type="PackedScene" uid="uid://supstqryanb5" path="res://Scenes/character/character.tscn" id="2_ti70g"]
+[ext_resource type="Script" path="res://Scripts/planet/planet_noise_layer.gd" id="3_dakq0"]
+[ext_resource type="Script" path="res://Scripts/planet/planet_noise.gd" id="4_scv2a"]
+[ext_resource type="Script" path="res://Scripts/planet/planet_data.gd" id="5_x4a2m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t8st3"]
+sky_top_color = Color(0.317647, 0.454902, 0.647059, 1)
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_bottom_color = Color(0.317647, 0.454902, 0.647059, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_76tf0"]
+sky_material = SubResource("ProceduralSkyMaterial_t8st3")
+
+[sub_resource type="Environment" id="Environment_lwrl4"]
+background_mode = 2
+sky = SubResource("Sky_76tf0")
+ambient_light_source = 3
+ambient_light_color = Color(0.556863, 0.556863, 0.556863, 1)
+ambient_light_sky_contribution = 0.3
+tonemap_mode = 3
+glow_enabled = true
+glow_normalized = true
+glow_bloom = 0.5
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m5yvc"]
+frequency = 0.4
+
+[sub_resource type="Resource" id="Resource_dilg2"]
+script = ExtResource("3_dakq0")
+noise_map = SubResource("FastNoiseLite_m5yvc")
+noise_power = 0.5
+min_noise_value = 0.2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b856j"]
+seed = 2
+frequency = 0.4
+
+[sub_resource type="Resource" id="Resource_k7jqk"]
+script = ExtResource("3_dakq0")
+noise_map = SubResource("FastNoiseLite_b856j")
+noise_power = 2.0
+min_noise_value = 1.0
+
+[sub_resource type="Resource" id="Resource_q4kjs"]
+script = ExtResource("4_scv2a")
+noise_layers = Array[ExtResource("3_dakq0")]([SubResource("Resource_dilg2"), SubResource("Resource_k7jqk")])
+random_noise_amount = 0.1
+
+[sub_resource type="Resource" id="Resource_fss3a"]
+script = ExtResource("5_x4a2m")
+radius = 50.0
+resolution = 50
+noise = SubResource("Resource_q4kjs")
+
+[node name="Main" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lwrl4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_blend_splits = true
+
+[node name="planet" parent="." instance=ExtResource("2_3wnba")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+generation_data = SubResource("Resource_fss3a")
+
+[node name="character" parent="." node_paths=PackedStringArray("planet") instance=ExtResource("2_ti70g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 62.6393, 0)
+planet = NodePath("../planet")

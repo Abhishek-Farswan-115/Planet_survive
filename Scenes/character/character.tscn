@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://byqwopa0vk2e4"]
+[gd_scene load_steps=6 format=3 uid="uid://supstqryanb5"]
 
-[ext_resource type="Script" path="res://Scripts/character.gd" id="1_pch8r"]
+[ext_resource type="Script" path="res://Scripts/player/character.gd" id="1_pch8r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iby4r"]
 radius = 0.4
@@ -38,7 +38,7 @@ mesh = SubResource("BoxMesh_l6sum")
 [node name="camera_pitch" type="Node3D" parent="orientation/camera"]
 
 [node name="camera_spring" type="SpringArm3D" parent="orientation/camera/camera_pitch"]
-spring_length = 20.0
+spring_length = 15.0
 
 [node name="camera" type="Camera3D" parent="orientation/camera/camera_pitch/camera_spring"]
 current = true
