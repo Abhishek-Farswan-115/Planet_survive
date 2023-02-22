@@ -34,7 +34,7 @@ func _ready() -> void:
 	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CAPTURED)
 	camera.top_level = true
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	camera.global_position = lerp(camera.global_position, orientation.global_position, position_interpolation)
 	camera.global_transform.basis = orientation.global_transform.basis
 
