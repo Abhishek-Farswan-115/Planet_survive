@@ -52,7 +52,7 @@ random_noise_amount = 0.1
 
 [sub_resource type="Resource" id="Resource_fss3a"]
 script = ExtResource("5_x4a2m")
-radius = 50.0
+radius = 40.0
 resolution = 50
 noise = SubResource("Resource_q4kjs")
 
