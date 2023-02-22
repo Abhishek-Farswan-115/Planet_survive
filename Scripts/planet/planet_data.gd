@@ -1,16 +1,19 @@
 @tool
 class_name PlanetData extends Resource
 
+## Base size of the planet. The planet will never be smaller than this, no matter what noise is being used
 @export var radius: float = 5.0:
 	set(val):
 		radius = val
 		changed.emit()
 
+## Subdivisions per projection mesh into the sphere. The higher it is, the more polygons that will be generated.
 @export var resolution: int = 50:
 	set(val):
 		resolution = val
 		changed.emit()
 
+## Noise class to change a planet properties. If you want to save a planet, save this resource instead of the whole PlanetData.
 @export var noise: PlanetNoise:
 	set(val):
 		noise = val

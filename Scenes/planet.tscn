@@ -3,47 +3,47 @@
 [ext_resource type="Script" path="res://Scripts/planet/planet.gd" id="1_xgdco"]
 [ext_resource type="Script" path="res://Scripts/planet/planet_mesh.gd" id="2_3gxlj"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_uny0w"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_v0hvp"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_rf6o6"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_jv07q"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_qel6f"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_lefhj"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_bnwni"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_7sq5x"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_30f5j"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_f5848"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_c80i8"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_2se7b"]
 
 [node name="planet" type="Node3D"]
 script = ExtResource("1_xgdco")
 
 [node name="up" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_uny0w")
+mesh = SubResource("ArrayMesh_v0hvp")
 script = ExtResource("2_3gxlj")
 normal = Vector3(0, 1, 0)
 
 [node name="down" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_rf6o6")
+mesh = SubResource("ArrayMesh_jv07q")
 script = ExtResource("2_3gxlj")
 normal = Vector3(0, -1, 0)
 
 [node name="left" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_qel6f")
+mesh = SubResource("ArrayMesh_lefhj")
 script = ExtResource("2_3gxlj")
 normal = Vector3(-1, 0, 0)
 
 [node name="right" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_bnwni")
+mesh = SubResource("ArrayMesh_7sq5x")
 script = ExtResource("2_3gxlj")
 normal = Vector3(1, 0, 0)
 
 [node name="front" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_30f5j")
+mesh = SubResource("ArrayMesh_f5848")
 script = ExtResource("2_3gxlj")
 normal = Vector3(0, 0, -1)
 
 [node name="back" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_c80i8")
+mesh = SubResource("ArrayMesh_2se7b")
 script = ExtResource("2_3gxlj")
 normal = Vector3(0, 0, 1)
