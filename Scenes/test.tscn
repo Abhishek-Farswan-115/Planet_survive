@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b3xhbgswg12we"]
+[gd_scene load_steps=23 format=3 uid="uid://b3xhbgswg12we"]
 
 [ext_resource type="PackedScene" uid="uid://ckppa41lwfx6d" path="res://Scenes/planet.tscn" id="2_3wnba"]
 [ext_resource type="PackedScene" uid="uid://supstqryanb5" path="res://Scenes/character/character.tscn" id="2_ti70g"]
@@ -22,9 +22,19 @@ ambient_light_source = 3
 ambient_light_color = Color(0.556863, 0.556863, 0.556863, 1)
 ambient_light_sky_contribution = 0.3
 tonemap_mode = 3
+tonemap_exposure = 0.7
 glow_enabled = true
 glow_normalized = true
 glow_bloom = 0.5
+
+[sub_resource type="Gradient" id="Gradient_pkmxb"]
+offsets = PackedFloat32Array(0, 0.159722, 0.243056, 0.479167, 1)
+colors = PackedColorArray(0.34375, 0.341368, 0.305018, 1, 0.310121, 0.640625, 0.198732, 1, 0.027451, 1, 0.164706, 1, 0.243137, 0.211765, 0.129412, 1, 0.243137, 0.211765, 0.129412, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g5ioc"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_pkmxb")
+use_hdr = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_m5yvc"]
 frequency = 0.4
@@ -37,7 +47,7 @@ min_noise_value = 0.2
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b856j"]
 seed = 2
-frequency = 0.4
+frequency = 0.5
 
 [sub_resource type="Resource" id="Resource_k7jqk"]
 script = ExtResource("3_dakq0")
@@ -45,16 +55,48 @@ noise_map = SubResource("FastNoiseLite_b856j")
 noise_power = 2.0
 min_noise_value = 1.0
 
-[sub_resource type="Resource" id="Resource_q4kjs"]
+[sub_resource type="Resource" id="Resource_vo2a7"]
+resource_local_to_scene = true
 script = ExtResource("4_scv2a")
 noise_layers = Array[ExtResource("3_dakq0")]([SubResource("Resource_dilg2"), SubResource("Resource_k7jqk")])
 random_noise_amount = 0.1
 
-[sub_resource type="Resource" id="Resource_fss3a"]
+[sub_resource type="Resource" id="Resource_wxauj"]
+resource_local_to_scene = true
 script = ExtResource("5_x4a2m")
 radius = 40.0
 resolution = 50
-noise = SubResource("Resource_q4kjs")
+noise = SubResource("Resource_vo2a7")
+height_gradient = SubResource("GradientTexture1D_g5ioc")
+
+[sub_resource type="Gradient" id="Gradient_7u6f6"]
+offsets = PackedFloat32Array(0.393846, 0.606154)
+colors = PackedColorArray(0.213542, 0.213542, 0.213542, 1, 0.385417, 0.385417, 0.385417, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5sldl"]
+gradient = SubResource("Gradient_7u6f6")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_blyw7"]
+frequency = 0.6
+
+[sub_resource type="Resource" id="Resource_ufii0"]
+script = ExtResource("3_dakq0")
+noise_map = SubResource("FastNoiseLite_blyw7")
+noise_power = 2.0
+min_noise_value = 0.0
+
+[sub_resource type="Resource" id="Resource_hcnpx"]
+script = ExtResource("4_scv2a")
+noise_layers = Array[ExtResource("3_dakq0")]([SubResource("Resource_ufii0")])
+random_noise_amount = 0.05
+
+[sub_resource type="Resource" id="Resource_3eyup"]
+resource_local_to_scene = true
+script = ExtResource("5_x4a2m")
+radius = 5.0
+resolution = 15
+noise = SubResource("Resource_hcnpx")
+height_gradient = SubResource("GradientTexture1D_5sldl")
 
 [node name="Main" type="Node"]
 
@@ -68,8 +110,15 @@ directional_shadow_blend_splits = true
 
 [node name="planet" parent="." instance=ExtResource("2_3wnba")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-generation_data = SubResource("Resource_fss3a")
+generation_data = SubResource("Resource_wxauj")
+
+[node name="planet2" parent="." instance=ExtResource("2_3wnba")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -106.435, 0, 0)
+generation_data = SubResource("Resource_3eyup")
 
 [node name="character" parent="." node_paths=PackedStringArray("planet") instance=ExtResource("2_ti70g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 62.6393, 0)
 planet = NodePath("../planet")
+deceleration = 0.1
+position_interpolation = 0.1
+max_rotation_degrees = -50.0

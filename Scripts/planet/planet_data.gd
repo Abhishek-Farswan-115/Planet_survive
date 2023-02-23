@@ -13,13 +13,25 @@ class_name PlanetData extends Resource
 		resolution = val
 		changed.emit()
 
-## Noise class to change a planet properties. If you want to save a planet, save this resource instead of the whole PlanetData.
+## Noise class to change a planet's height and shape properties.
 @export var noise: PlanetNoise:
 	set(val):
 		noise = val
 		if noise != null and !(noise.is_connected("changed", Callable(self, "_on_data_changed"))):
 				noise.changed.connect(Callable(self, "_on_data_changed"))
 		changed.emit()
+
+@export var height_gradient: GradientTexture1D:
+	set(val):
+		height_gradient = val
+		if height_gradient != null and !(height_gradient.is_connected("changed", Callable(self, "_on_data_changed"))):
+				height_gradient.changed.connect(Callable(self, "_on_data_changed"))
+
+var min_height: float = 1.79769e308
+var max_height: float = 0.0
+
+func _init() -> void:
+	resource_local_to_scene = true
 
 func _on_data_changed() -> void:
 	changed.emit()

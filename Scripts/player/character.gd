@@ -15,6 +15,8 @@ class_name PlanetCharacter extends CharacterBody3D
 @export_category("Camera")
 @export var sensitivity:float = 0.001
 @export var position_interpolation:float = 0.3
+@export var max_rotation_degrees:float = -60.0
+@export var min_rotation_degrees:float = -70.0
 
 const BASE_PLANET_FORCE = 1.0
 
@@ -33,6 +35,7 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready() -> void:
 	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CAPTURED)
 	camera.top_level = true
+	$orientation/camera/camera_pitch/camera_spring.add_excluded_object(self)
 
 func _process(_delta: float) -> void:
 	camera.global_position = lerp(camera.global_position, orientation.global_position, position_interpolation)
@@ -65,4 +68,4 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		orientation.rotate_y(event.relative.x* -sensitivity)
 		camera_pitch.rotate_x(event.relative.y *-sensitivity)
-		camera_pitch.rotation.x = clamp(camera_pitch.rotation.x, deg_to_rad(-70.0), deg_to_rad(-60.0))
+		camera_pitch.rotation.x = clamp(camera_pitch.rotation.x, deg_to_rad(min_rotation_degrees), deg_to_rad(max_rotation_degrees))

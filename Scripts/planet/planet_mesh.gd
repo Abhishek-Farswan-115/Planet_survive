@@ -50,6 +50,10 @@ func regenerate_mesh(gen_data: PlanetData) -> void:
 			
 			st.add_vertex(point_on_planet)
 			
+			var h :float= point_on_planet.length()
+			if h < gen_data.min_height: gen_data.min_height = h
+			if h > gen_data.max_height: gen_data.max_height = h
+			
 			if x != resolution-1 and y != resolution-1:
 				st.add_index(i+resolution)
 				st.add_index(i+resolution+1)
@@ -64,12 +68,20 @@ func regenerate_mesh(gen_data: PlanetData) -> void:
 	st.generate_normals()
 	mesh_arrays = st.commit_to_arrays()
 	
-	call_deferred("_update_mesh", mesh_arrays)
+	call_deferred("_update_mesh", mesh_arrays, gen_data)
 
-func _update_mesh(arrays: Array) -> void:
+func _update_mesh(arrays: Array, gen_data: PlanetData) -> void:
 	var _mesh := ArrayMesh.new()
 	_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	mesh = _mesh
+	
+	material_override = ShaderMaterial.new()
+	material_override.shader = preload("res://Shaders/Planet/planet_shader.gdshader")
+	
+	material_override.set_shader_parameter("min_height", gen_data.min_height)
+	material_override.set_shader_parameter("max_height", gen_data.max_height)
+	material_override.set_shader_parameter("height_gradient", gen_data.height_gradient)
+	
 	for child in get_children():
 		child.queue_free()
 	create_trimesh_collision()
