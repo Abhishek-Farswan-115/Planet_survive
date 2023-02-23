@@ -1,44 +1,45 @@
 [gd_scene load_steps=8 format=3 uid="uid://baa7bw4e8sdkb"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfwpr"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t3qj4"]
 shading_mode = 0
 diffuse_mode = 3
 specular_mode = 1
 vertex_color_use_as_albedo = true
 proximity_fade_distance = 0.1
 
-[sub_resource type="Gradient" id="Gradient_l1qp3"]
-offsets = PackedFloat32Array(0, 0.582569, 1)
-colors = PackedColorArray(0.917647, 0, 0, 1, 0.914063, 0.552162, 0.127567, 1, 1, 1, 1, 1)
+[sub_resource type="Gradient" id="Gradient_qlwdy"]
+offsets = PackedFloat32Array(0, 0.247706, 0.440367)
+colors = PackedColorArray(0.539063, 0.164432, 0.0589415, 1, 0.519531, 0.0293061, 0, 1, 0.847656, 0.805822, 0.793047, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_2pt3w"]
-gradient = SubResource("Gradient_l1qp3")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dnkxj"]
+gradient = SubResource("Gradient_qlwdy")
 
-[sub_resource type="Curve" id="Curve_as8oc"]
+[sub_resource type="Curve" id="Curve_i1qb6"]
 _data = [Vector2(0, 0.445455), 0.0, -0.0580419, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_b863u"]
-curve = SubResource("Curve_as8oc")
+[sub_resource type="CurveTexture" id="CurveTexture_ds6f1"]
+curve = SubResource("Curve_i1qb6")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bq06g"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_62612"]
 emission_shape = 1
 emission_sphere_radius = 1.5
 direction = Vector3(0, -1, 0)
 spread = 5.0
 gravity = Vector3(0, 0, 0)
-initial_velocity_max = 36.76
+initial_velocity_max = 132.35
 scale_min = 0.0
-scale_curve = SubResource("CurveTexture_b863u")
-color_ramp = SubResource("GradientTexture1D_2pt3w")
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_ds6f1")
+color_ramp = SubResource("GradientTexture1D_dnkxj")
 
-[sub_resource type="QuadMesh" id="QuadMesh_i7lut"]
+[sub_resource type="QuadMesh" id="QuadMesh_xkdib"]
 
 [node name="Boost" type="GPUParticles3D"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_nfwpr")
+material_override = SubResource("StandardMaterial3D_t3qj4")
 amount = 100
 lifetime = 0.5
 transform_align = 1
-process_material = SubResource("ParticleProcessMaterial_bq06g")
-draw_pass_1 = SubResource("QuadMesh_i7lut")
+process_material = SubResource("ParticleProcessMaterial_62612")
+draw_pass_1 = SubResource("QuadMesh_xkdib")
