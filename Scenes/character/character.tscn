@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://supstqryanb5"]
+[gd_scene load_steps=12 format=3 uid="uid://supstqryanb5"]
 
 [ext_resource type="Script" path="res://Scripts/player/character.gd" id="1_pch8r"]
+[ext_resource type="PackedScene" uid="uid://baa7bw4e8sdkb" path="res://Scenes/boost_particle.tscn" id="2_204ak"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iby4r"]
 radius = 0.4
@@ -334,9 +335,11 @@ _data = {
 }
 
 [node name="character" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.815682, 0)
 script = ExtResource("1_pch8r")
 
 [node name="collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.178652, 0)
 shape = SubResource("CapsuleShape3D_iby4r")
 
 [node name="orientation" type="Node3D" parent="."]
@@ -413,6 +416,7 @@ bones/7/rotation = Quaternion(-0.689871, 0.155168, 0.689871, 0.155168)
 bones/7/scale = Vector3(1, 1, 1)
 
 [node name="ROBO" type="MeshInstance3D" parent="orientation/Armature/Skeleton3D"]
+transform = Transform3D(1, 0, -7.10543e-15, 0, 1, 0, 7.10543e-15, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_k6m0d")
 skin = SubResource("Skin_8b7b3")
 
@@ -421,3 +425,5 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_fbya2")
 }
+
+[node name="Boost" parent="." instance=ExtResource("2_204ak")]
