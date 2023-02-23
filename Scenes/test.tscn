@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b3xhbgswg12we"]
+[gd_scene load_steps=33 format=3 uid="uid://b3xhbgswg12we"]
 
 [ext_resource type="PackedScene" uid="uid://ckppa41lwfx6d" path="res://Scenes/planet.tscn" id="2_3wnba"]
 [ext_resource type="PackedScene" uid="uid://supstqryanb5" path="res://Scenes/character/character.tscn" id="2_ti70g"]
@@ -70,6 +70,45 @@ resolution = 50
 noise = SubResource("Resource_vo2a7")
 height_gradient = SubResource("GradientTexture1D_g5ioc")
 
+[sub_resource type="Gradient" id="Gradient_kgam2"]
+offsets = PackedFloat32Array(0.187311, 0.441088, 0.637462, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.994792, 0, 0.0765977, 1, 0, 0, 0.172549, 1, 1, 0, 0.0769987, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_etngj"]
+gradient = SubResource("Gradient_kgam2")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4pmuc"]
+frequency = 0.323
+
+[sub_resource type="Resource" id="Resource_qm8kf"]
+script = ExtResource("3_dakq0")
+noise_map = SubResource("FastNoiseLite_4pmuc")
+noise_power = 1.5
+min_noise_value = 0.3
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0e26c"]
+frequency = 0.589
+
+[sub_resource type="Resource" id="Resource_dkvrt"]
+script = ExtResource("3_dakq0")
+noise_map = SubResource("FastNoiseLite_0e26c")
+noise_power = 2.0
+min_noise_value = 1.0
+
+[sub_resource type="Resource" id="Resource_ecym4"]
+script = ExtResource("4_scv2a")
+noise_layers = Array[ExtResource("3_dakq0")]([SubResource("Resource_qm8kf"), SubResource("Resource_dkvrt")])
+random_noise_amount = 0.1
+
+[sub_resource type="Resource" id="Resource_fjcil"]
+resource_local_to_scene = true
+script = ExtResource("5_x4a2m")
+radius = 20.0
+gravity_radius_offset = 20.0
+resolution = 50
+noise = SubResource("Resource_ecym4")
+height_gradient = SubResource("GradientTexture1D_etngj")
+
 [sub_resource type="Gradient" id="Gradient_7u6f6"]
 offsets = PackedFloat32Array(0.393846, 0.606154)
 colors = PackedColorArray(0.213542, 0.213542, 0.213542, 1, 0.385417, 0.385417, 0.385417, 1)
@@ -118,12 +157,16 @@ directional_shadow_blend_splits = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 generation_data = SubResource("Resource_wxauj")
 
+[node name="planet3" parent="." instance=ExtResource("2_3wnba")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 62.7882, 0, 117.946)
+generation_data = SubResource("Resource_fjcil")
+
 [node name="planet2" parent="." instance=ExtResource("2_3wnba")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -106.435, 0, 0)
 generation_data = SubResource("Resource_3eyup")
 
 [node name="character" parent="." instance=ExtResource("2_ti70g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 59.4784, -1.00027)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.02756, 59.4784, 4.2291)
 
 [node name="Node3D" type="Node3D" parent="."]
 
