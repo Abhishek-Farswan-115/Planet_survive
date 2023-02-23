@@ -27,6 +27,7 @@ class_name PlanetData extends Resource
 				noise.changed.connect(Callable(self, "_on_data_changed"))
 		changed.emit()
 
+## Used within a shader to get the planet color based on vertex height. 0 means the lowest, 1 the highest one.
 @export var height_gradient: GradientTexture1D:
 	set(val):
 		height_gradient = val

@@ -1,6 +1,8 @@
 @tool
 class_name Planet extends Node3D
 
+@onready var gravity_area: Area3D = $gravity_area
+
 ## Resource to be used to generate the planet. If you want to save the planet's parameters, you should save this resource to disk.
 @export var generation_data: PlanetData:
 	set(val):
@@ -26,4 +28,6 @@ func _on_planet_generation_data_changed() -> void:
 func _on_gravity_area_body_entered(body: Node3D) -> void:
 	if body is PlanetCharacter or body is Projectile:
 		body.planet = self
-		print(body.name)
+
+func affects_body(body: Node3D) -> bool:
+	return gravity_area.overlaps_body(body)

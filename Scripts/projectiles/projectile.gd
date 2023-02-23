@@ -1,18 +1,17 @@
-class_name Projectile extends StaticBody3D
+class_name Projectile extends RigidBody3D
 
-var planet: Node3D
+@export_category("Parameters")
+@export var speed: float = 30.0
 
-var received_planet :bool:
-	set(val):
-		received_planet = val
-		if val == true:
-			_on_received_planet()
+var planet: Planet
+var direction: Vector3
 
-func _on_received_planet() -> void:
-	print(planet)
+var planet_attraction: float = 9.8
+
+var first_frame: bool = true
+var spawn_height: float = 0.0
 
 func _physics_process(_delta: float) -> void:
-	if planet && !received_planet:
-		received_planet = true
-	print(received_planet)
-	position += -basis.z
+	if first_frame:
+		apply_central_impulse(direction * speed)
+		first_frame = false

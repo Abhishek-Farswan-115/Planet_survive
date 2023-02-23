@@ -23,7 +23,7 @@ const BASE_PLANET_FORCE = 1.0
 @onready var camera: Node3D = $orientation/camera
 @onready var camera_pitch: Node3D = $orientation/camera/camera_pitch
 
-var planet: Node3D
+var planet: Planet
 
 var move_vel : Vector3
 var up_vel: Vector3
@@ -64,14 +64,16 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = move_vel + up_vel
 	move_and_slide()
+	
+	if Input.is_action_just_pressed("shoot"):
+		if planet:
+			_create_projectile()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		orientation.rotate_y(event.relative.x* -sensitivity)
 		camera_pitch.rotate_x(event.relative.y *-sensitivity)
 		camera_pitch.rotation.x = clamp(camera_pitch.rotation.x, deg_to_rad(min_rotation_degrees), deg_to_rad(max_rotation_degrees))
-	if Input.is_action_just_pressed("shoot"):
-		_create_projectile()
 
 func _create_projectile() -> void:
 	var proj := preload("res://Scenes/projectiles/projectile.tscn").instantiate()
@@ -79,4 +81,7 @@ func _create_projectile() -> void:
 
 func _finish_projectile_creation(proj: Projectile) -> void:
 	get_tree().current_scene.add_child(proj)
-	proj.global_position = global_position
+	proj.planet = planet
+	proj.direction = -orientation.global_transform.basis.z
+	proj.global_position = global_position + proj.direction
+	proj.global_transform.basis = Basis.looking_at(proj.direction, (proj.global_position - proj.planet.global_position))
