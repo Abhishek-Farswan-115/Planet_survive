@@ -124,9 +124,6 @@ generation_data = SubResource("Resource_3eyup")
 
 [node name="character" parent="." instance=ExtResource("2_ti70g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 59.4784, -1.00027)
-deceleration = 0.1
-position_interpolation = 0.1
-max_rotation_degrees = -30.0
 
 [node name="Node3D" type="Node3D" parent="."]
 
