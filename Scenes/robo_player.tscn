@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dk5mm50d5728w"]
+[gd_scene load_steps=10 format=3 uid="uid://pfigg02tj85o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ld2k5"]
 resource_name = "Secondary"
