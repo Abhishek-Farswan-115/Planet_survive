@@ -1,7 +1,6 @@
 class_name PlanetCharacter extends CharacterBody3D
 
 @export_category("Parameters")
-@export var planet: Node3D
 @export var mass: float = 4.0
 
 @export_category("Movement")
@@ -20,10 +19,11 @@ class_name PlanetCharacter extends CharacterBody3D
 
 const BASE_PLANET_FORCE = 1.0
 
-
 @onready var orientation: Node3D = $orientation
 @onready var camera: Node3D = $orientation/camera
 @onready var camera_pitch: Node3D = $orientation/camera/camera_pitch
+
+var planet: Node3D
 
 var move_vel : Vector3
 var up_vel: Vector3
@@ -42,6 +42,7 @@ func _process(_delta: float) -> void:
 	camera.global_transform.basis = orientation.global_transform.basis
 
 func _physics_process(delta: float) -> void:
+	if !planet: return
 	up_direction = (global_position - planet.global_position).normalized()
 	transform.basis = Basis.looking_at(up_direction.cross(basis.x), up_direction)
 	in_floor = is_on_floor()
@@ -69,3 +70,13 @@ func _input(event: InputEvent) -> void:
 		orientation.rotate_y(event.relative.x* -sensitivity)
 		camera_pitch.rotate_x(event.relative.y *-sensitivity)
 		camera_pitch.rotation.x = clamp(camera_pitch.rotation.x, deg_to_rad(min_rotation_degrees), deg_to_rad(max_rotation_degrees))
+	if Input.is_action_just_pressed("shoot"):
+		_create_projectile()
+
+func _create_projectile() -> void:
+	var proj := preload("res://Scenes/projectiles/projectile.tscn").instantiate()
+	call_deferred("_finish_projectile_creation", proj)
+
+func _finish_projectile_creation(proj: Projectile) -> void:
+	get_tree().current_scene.add_child(proj)
+	proj.global_position = global_position

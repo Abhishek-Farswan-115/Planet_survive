@@ -18,5 +18,12 @@ func _on_planet_generation_data_changed() -> void:
 		generation_data.max_height = 0.0
 	
 	for child in get_children():
-		var face := child as PlanetMesh
-		face.regenerate_mesh(generation_data)
+		if child is PlanetMesh:
+			child.regenerate_mesh(generation_data)
+		elif child is PlanetGravityArea:
+			child.regenerate_gravity(generation_data)
+
+func _on_gravity_area_body_entered(body: Node3D) -> void:
+	if body is PlanetCharacter or body is Projectile:
+		body.planet = self
+		print(body.name)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b3xhbgswg12we"]
+[gd_scene load_steps=25 format=3 uid="uid://b3xhbgswg12we"]
 
 [ext_resource type="PackedScene" uid="uid://ckppa41lwfx6d" path="res://Scenes/planet.tscn" id="2_3wnba"]
 [ext_resource type="PackedScene" uid="uid://supstqryanb5" path="res://Scenes/character/character.tscn" id="2_ti70g"]
@@ -42,7 +42,7 @@ frequency = 0.4
 [sub_resource type="Resource" id="Resource_dilg2"]
 script = ExtResource("3_dakq0")
 noise_map = SubResource("FastNoiseLite_m5yvc")
-noise_power = 0.5
+noise_power = 0.6
 min_noise_value = 0.2
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b856j"]
@@ -52,7 +52,7 @@ frequency = 0.5
 [sub_resource type="Resource" id="Resource_k7jqk"]
 script = ExtResource("3_dakq0")
 noise_map = SubResource("FastNoiseLite_b856j")
-noise_power = 2.0
+noise_power = 1.8
 min_noise_value = 1.0
 
 [sub_resource type="Resource" id="Resource_vo2a7"]
@@ -65,6 +65,7 @@ random_noise_amount = 0.1
 resource_local_to_scene = true
 script = ExtResource("5_x4a2m")
 radius = 40.0
+gravity_radius_offset = 20.0
 resolution = 50
 noise = SubResource("Resource_vo2a7")
 height_gradient = SubResource("GradientTexture1D_g5ioc")
@@ -94,9 +95,14 @@ random_noise_amount = 0.05
 resource_local_to_scene = true
 script = ExtResource("5_x4a2m")
 radius = 5.0
+gravity_radius_offset = 20.0
 resolution = 15
 noise = SubResource("Resource_hcnpx")
 height_gradient = SubResource("GradientTexture1D_5sldl")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7kec6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ptl4h"]
 
 [node name="Main" type="Node"]
 
@@ -116,9 +122,37 @@ generation_data = SubResource("Resource_wxauj")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -106.435, 0, 0)
 generation_data = SubResource("Resource_3eyup")
 
-[node name="character" parent="." node_paths=PackedStringArray("planet") instance=ExtResource("2_ti70g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 62.6393, 0)
-planet = NodePath("../planet")
+[node name="character" parent="." instance=ExtResource("2_ti70g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 59.4784, -1.00027)
 deceleration = 0.1
 position_interpolation = 0.1
 max_rotation_degrees = -50.0
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.91778, 58.7274, -1.00027)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_7kec6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_ptl4h")
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -105.708, 17.7524, -20.4723)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3"]
+shape = SubResource("BoxShape3D_7kec6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3"]
+mesh = SubResource("BoxMesh_ptl4h")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.91778, 58.7274, -16.4348)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
+shape = SubResource("BoxShape3D_7kec6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
+mesh = SubResource("BoxMesh_ptl4h")

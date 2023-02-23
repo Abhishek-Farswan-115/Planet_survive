@@ -7,6 +7,12 @@ class_name PlanetData extends Resource
 		radius = val
 		changed.emit()
 
+## Offset for the gravity area to be generated
+@export var gravity_radius_offset: float = 20.0:
+	set(val):
+		gravity_radius_offset = val
+		changed.emit()
+
 ## Subdivisions per projection mesh into the sphere. The higher it is, the more polygons that will be generated.
 @export var resolution: int = 50:
 	set(val):
