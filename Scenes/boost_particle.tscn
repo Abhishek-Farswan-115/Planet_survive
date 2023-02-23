@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cpp83ynl644e5"]
+[gd_scene load_steps=8 format=3 uid="uid://baa7bw4e8sdkb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t3qj4"]
 shading_mode = 0
@@ -15,7 +15,7 @@ colors = PackedColorArray(0.539063, 0.164432, 0.0589415, 1, 0.519531, 0.0293061,
 gradient = SubResource("Gradient_qlwdy")
 
 [sub_resource type="Curve" id="Curve_i1qb6"]
-_data = [Vector2(0.00460123, 0.484663), 0.0, -0.0580419, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.445455), 0.0, -0.0580419, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_ds6f1"]
