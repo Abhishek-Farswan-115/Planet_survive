@@ -6,24 +6,30 @@ class_name PlanetCharacter extends CharacterBody3D
 @export_category("Movement")
 @export var speed:float = 5.0
 @export var acceleration:float = 0.3
-@export var deceleration:float = 0.3
+@export var deceleration:float = 0.1
 @export var air_control:float = 0.1
-
 @export var jump_impulse:float = 10.0
 
 @export_category("Camera")
 @export var sensitivity:float = 0.001
-@export var position_interpolation:float = 0.3
-@export var max_rotation_degrees:float = -60.0
+@export var position_interpolation:float = 0.1
+@export var max_rotation_degrees:float = -30.0
 @export var min_rotation_degrees:float = -70.0
+
+@export_category("Visuals")
+@export var mesh_inclination_amount: float = 0.2
+@export var mesh_inclination_speed: float = 0.2
 
 const BASE_PLANET_FORCE = 1.0
 
 @onready var orientation: Node3D = $orientation
 @onready var camera: Node3D = $orientation/camera
 @onready var camera_pitch: Node3D = $orientation/camera/camera_pitch
+@onready var mesh: Node3D = $orientation/mesh
 
 var planet: Planet
+
+var input_dir: Vector2
 
 var move_vel : Vector3
 var up_vel: Vector3
@@ -40,6 +46,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	camera.global_position = lerp(camera.global_position, orientation.global_position, position_interpolation)
 	camera.global_transform.basis = orientation.global_transform.basis
+	
+	mesh.rotation.x = lerp(mesh.rotation.x, -input_dir.y * mesh_inclination_amount, mesh_inclination_speed)
+	mesh.rotation.z = lerp(mesh.rotation.z, input_dir.x * mesh_inclination_amount, mesh_inclination_speed)
 
 func _physics_process(delta: float) -> void:
 	if !planet: return
@@ -54,7 +63,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") && in_floor:
 		up_vel += up_direction * (jump_impulse +BASE_PLANET_FORCE)
 	
-	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction = (orientation.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	if in_floor:
