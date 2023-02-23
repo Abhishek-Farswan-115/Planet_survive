@@ -1,7 +1,6 @@
 class_name PlanetCharacter extends CharacterBody3D
 
 @export_category("Parameters")
-@export var planet: Node3D
 @export var mass: float = 4.0
 
 @export_category("Movement")
@@ -15,13 +14,16 @@ class_name PlanetCharacter extends CharacterBody3D
 @export_category("Camera")
 @export var sensitivity:float = 0.001
 @export var position_interpolation:float = 0.3
+@export var max_rotation_degrees:float = -60.0
+@export var min_rotation_degrees:float = -70.0
 
 const BASE_PLANET_FORCE = 1.0
-
 
 @onready var orientation: Node3D = $orientation
 @onready var camera: Node3D = $orientation/camera
 @onready var camera_pitch: Node3D = $orientation/camera/camera_pitch
+
+var planet: Planet
 
 var move_vel : Vector3
 var up_vel: Vector3
@@ -33,12 +35,14 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready() -> void:
 	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CAPTURED)
 	camera.top_level = true
+	$orientation/camera/camera_pitch/camera_spring.add_excluded_object(self)
 
 func _process(_delta: float) -> void:
 	camera.global_position = lerp(camera.global_position, orientation.global_position, position_interpolation)
 	camera.global_transform.basis = orientation.global_transform.basis
 
 func _physics_process(delta: float) -> void:
+	if !planet: return
 	up_direction = (global_position - planet.global_position).normalized()
 	transform.basis = Basis.looking_at(up_direction.cross(basis.x), up_direction)
 	in_floor = is_on_floor()
@@ -60,9 +64,24 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = move_vel + up_vel
 	move_and_slide()
+	
+	if Input.is_action_just_pressed("shoot"):
+		if planet:
+			_create_projectile()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		orientation.rotate_y(event.relative.x* -sensitivity)
 		camera_pitch.rotate_x(event.relative.y *-sensitivity)
-		camera_pitch.rotation.x = clamp(camera_pitch.rotation.x, deg_to_rad(-70.0), deg_to_rad(-60.0))
+		camera_pitch.rotation.x = clamp(camera_pitch.rotation.x, deg_to_rad(min_rotation_degrees), deg_to_rad(max_rotation_degrees))
+
+func _create_projectile() -> void:
+	var proj := preload("res://Scenes/projectiles/projectile.tscn").instantiate()
+	call_deferred("_finish_projectile_creation", proj)
+
+func _finish_projectile_creation(proj: Projectile) -> void:
+	get_tree().current_scene.add_child(proj)
+	proj.planet = planet
+	proj.direction = -orientation.global_transform.basis.z
+	proj.global_position = global_position + proj.direction
+	proj.global_transform.basis = Basis.looking_at(proj.direction, (proj.global_position - proj.planet.global_position))

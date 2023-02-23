@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://beajadmg3s5ld"]
 
 [ext_resource type="PackedScene" uid="uid://bw55is28vau23" path="res://Scenes/planet_1.tscn" id="1_dh8gw"]
-[ext_resource type="PackedScene" uid="uid://byqwopa0vk2e4" path="res://Scenes/character/character.tscn" id="3_82ygy"]
+[ext_resource type="PackedScene" uid="uid://supstqryanb5" path="res://Scenes/character/character.tscn" id="3_82ygy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t8st3"]
 sky_top_color = Color(0.317647, 0.454902, 0.647059, 1)
@@ -35,6 +35,5 @@ directional_shadow_blend_splits = true
 
 [node name="Planet_1" parent="." instance=ExtResource("1_dh8gw")]
 
-[node name="character" parent="." node_paths=PackedStringArray("planet") instance=ExtResource("3_82ygy")]
+[node name="character" parent="." instance=ExtResource("3_82ygy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 37.5513, 0)
-planet = NodePath("../Planet_1")
