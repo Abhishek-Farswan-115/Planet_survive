@@ -10,22 +10,24 @@ render_priority = 0
 shader = ExtResource("2_h0fdq")
 shader_parameter/min_height = null
 shader_parameter/max_height = null
+shader_parameter/slope_offset = 0.5
+shader_parameter/slope_albedo = Color(0.3, 0.3, 0.3, 1)
 shader_parameter/albedo = Color(0.8, 0.8, 0.8, 1)
 shader_parameter/roughness = 1.0
 shader_parameter/specular = 0.0
 shader_parameter/metallic = 0.0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_bkvp8"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_nvh4c"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_8l2po"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_lxd3o"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_0vp6t"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_8pfho"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_o460h"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_y87u2"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_6w7dr"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_dnt47"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_ba3k1"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_gsele"]
 
 [node name="planet" type="Node3D"]
 script = ExtResource("1_xgdco")
@@ -39,37 +41,37 @@ script = ExtResource("2_bjw6l")
 
 [node name="up" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_my7y2")
-mesh = SubResource("ArrayMesh_bkvp8")
+mesh = SubResource("ArrayMesh_nvh4c")
 script = ExtResource("2_3gxlj")
 normal = Vector3(0, 1, 0)
 
 [node name="down" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_my7y2")
-mesh = SubResource("ArrayMesh_8l2po")
+mesh = SubResource("ArrayMesh_lxd3o")
 script = ExtResource("2_3gxlj")
 normal = Vector3(0, -1, 0)
 
 [node name="left" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_my7y2")
-mesh = SubResource("ArrayMesh_0vp6t")
+mesh = SubResource("ArrayMesh_8pfho")
 script = ExtResource("2_3gxlj")
 normal = Vector3(-1, 0, 0)
 
 [node name="right" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_my7y2")
-mesh = SubResource("ArrayMesh_o460h")
+mesh = SubResource("ArrayMesh_y87u2")
 script = ExtResource("2_3gxlj")
 normal = Vector3(1, 0, 0)
 
 [node name="front" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_my7y2")
-mesh = SubResource("ArrayMesh_6w7dr")
+mesh = SubResource("ArrayMesh_dnt47")
 script = ExtResource("2_3gxlj")
 normal = Vector3(0, 0, -1)
 
 [node name="back" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_my7y2")
-mesh = SubResource("ArrayMesh_ba3k1")
+mesh = SubResource("ArrayMesh_gsele")
 script = ExtResource("2_3gxlj")
 normal = Vector3(0, 0, 1)
 

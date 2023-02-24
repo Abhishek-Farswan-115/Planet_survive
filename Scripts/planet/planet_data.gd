@@ -27,12 +27,24 @@ class_name PlanetData extends Resource
 				noise.changed.connect(Callable(self, "_on_data_changed"))
 		changed.emit()
 
+@export_category("Visuals")
 ## Used within a shader to get the planet color based on vertex height. 0 means the lowest, 1 the highest one.
 @export var height_gradient: GradientTexture1D:
 	set(val):
 		height_gradient = val
 		if height_gradient != null and !(height_gradient.is_connected("changed", Callable(self, "_on_data_changed"))):
 				height_gradient.changed.connect(Callable(self, "_on_data_changed"))
+
+@export var slope_offset: float= 0.5:
+	set(val):
+		slope_offset = val
+		changed.emit() 
+
+## Used to determine what color should steep areas be.
+@export_color_no_alpha var slope_albedo: Color = Color.DIM_GRAY:
+	set(val):
+		slope_albedo = val
+		changed.emit()
 
 var min_height: float = 1.79769e308
 var max_height: float = 0.0

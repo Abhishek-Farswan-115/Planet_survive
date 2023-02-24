@@ -77,10 +77,12 @@ func _update_mesh(arrays: Array, gen_data: PlanetData) -> void:
 	
 	material_override = ShaderMaterial.new()
 	material_override.shader = preload("res://Shaders/Planet/planet_shader.gdshader")
-	
+
 	material_override.set_shader_parameter("min_height", gen_data.min_height)
 	material_override.set_shader_parameter("max_height", gen_data.max_height)
 	material_override.set_shader_parameter("height_gradient", gen_data.height_gradient)
+	material_override.set_shader_parameter("slope_albedo", gen_data.slope_albedo)
+	material_override.set_shader_parameter("slope_offset", gen_data.slope_offset)
 	
 	for child in get_children():
 		child.queue_free()

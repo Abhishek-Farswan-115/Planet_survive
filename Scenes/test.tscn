@@ -21,7 +21,6 @@ sky = SubResource("Sky_76tf0")
 ambient_light_sky_contribution = 0.0
 tonemap_mode = 3
 tonemap_exposure = 0.7
-ssil_enabled = true
 glow_enabled = true
 glow_normalized = true
 glow_bloom = 0.5
@@ -68,6 +67,8 @@ gravity_radius_offset = 20.0
 resolution = 50
 noise = SubResource("Resource_vo2a7")
 height_gradient = SubResource("GradientTexture1D_g5ioc")
+slope_offset = 0.5
+slope_albedo = Color(0.411765, 0.411765, 0.411765, 1)
 
 [sub_resource type="Gradient" id="Gradient_kgam2"]
 offsets = PackedFloat32Array(0.187311, 0.441088, 0.637462, 1)
@@ -107,6 +108,8 @@ gravity_radius_offset = 20.0
 resolution = 50
 noise = SubResource("Resource_ecym4")
 height_gradient = SubResource("GradientTexture1D_etngj")
+slope_offset = 3.0
+slope_albedo = Color(0.411765, 0.411765, 0.411765, 1)
 
 [sub_resource type="Gradient" id="Gradient_7u6f6"]
 offsets = PackedFloat32Array(0.393846, 0.606154)
@@ -137,6 +140,8 @@ gravity_radius_offset = 20.0
 resolution = 15
 noise = SubResource("Resource_hcnpx")
 height_gradient = SubResource("GradientTexture1D_5sldl")
+slope_offset = 0.5
+slope_albedo = Color(0.411765, 0.411765, 0.411765, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7kec6"]
 
@@ -148,12 +153,11 @@ height_gradient = SubResource("GradientTexture1D_5sldl")
 environment = SubResource("Environment_lwrl4")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0.0325276, 0.450148, 0.892361, -0.498944, 0.780938, -0.375754, 0, 0, 0)
 shadow_enabled = true
-directional_shadow_blend_splits = true
 
 [node name="planet" parent="." instance=ExtResource("2_3wnba")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(0.285108, 0.737462, 0.612261, 0.952851, -0.148851, -0.264419, -0.103864, 0.658781, -0.745131, 0, 0, 0)
 generation_data = SubResource("Resource_wxauj")
 
 [node name="planet3" parent="." instance=ExtResource("2_3wnba")]
