@@ -24,6 +24,8 @@ func _on_planet_generation_data_changed() -> void:
 			child.regenerate_mesh(generation_data)
 		elif child is PlanetGravityArea:
 			child.regenerate_gravity(generation_data)
+		elif child is PlanetAtmosphere:
+			child.regenerate_atmosphere(generation_data)
 
 func _on_gravity_area_body_entered(body: Node3D) -> void:
 	if body is PlanetCharacter or body is Projectile:

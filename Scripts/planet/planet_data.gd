@@ -27,7 +27,7 @@ class_name PlanetData extends Resource
 				noise.changed.connect(Callable(self, "_on_data_changed"))
 		changed.emit()
 
-@export_category("Visuals")
+@export_group("Visuals")
 ## Used within a shader to get the planet color based on vertex height. 0 means the lowest, 1 the highest one.
 @export var height_gradient: GradientTexture1D:
 	set(val):
@@ -44,6 +44,33 @@ class_name PlanetData extends Resource
 @export_color_no_alpha var slope_albedo: Color = Color.DIM_GRAY:
 	set(val):
 		slope_albedo = val
+		changed.emit()
+
+@export_group("Atmosphere", "atmosphere")
+## Defines the maximum  height of the atmosphere
+@export var atmosphere_square_size: float = 100.0:
+	set(val):
+		atmosphere_square_size = val
+		changed.emit()
+
+@export var atmosphere_density: float = 0.1:
+	set(val):
+		atmosphere_density = val
+		changed.emit()
+
+@export var atmosphere_curve: float = 2.0:
+	set(val):
+		atmosphere_curve = val
+		changed.emit()
+
+@export_color_no_alpha var atmosphere_albedo: Color = Color.DEEP_SKY_BLUE:
+	set(val):
+		atmosphere_albedo = val
+		changed.emit()
+
+@export_color_no_alpha var atmosphere_emission: Color = Color.DEEP_SKY_BLUE:
+	set(val):
+		atmosphere_emission = val
 		changed.emit()
 
 var min_height: float = 1.79769e308
