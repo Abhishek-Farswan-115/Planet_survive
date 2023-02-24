@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://supstqryanb5"]
 
 [ext_resource type="Script" path="res://Scripts/player/character.gd" id="1_pch8r"]
-[ext_resource type="PackedScene" uid="uid://baa7bw4e8sdkb" path="res://Scenes/boost_particle.tscn" id="2_204ak"]
+[ext_resource type="PackedScene" uid="uid://cpp83ynl644e5" path="res://Scenes/boost_particle.tscn" id="2_204ak"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iby4r"]
 radius = 0.4
