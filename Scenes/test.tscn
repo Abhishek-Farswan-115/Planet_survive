@@ -146,7 +146,7 @@ environment = SubResource("Environment_lwrl4")
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0.0325276, 0.450148, 0.892361, -0.498944, 0.780938, -0.375754, 0, 0, 0)
 shadow_enabled = true
 directional_shadow_mode = 1
-directional_shadow_split_1 = 0.2
+directional_shadow_split_1 = 0.4
 
 [node name="planet" parent="." instance=ExtResource("2_3wnba")]
 transform = Transform3D(-0.175298, 0.984515, 0, -0.984515, -0.175298, 0, 0, 0, 1, 0, 0, 0)
