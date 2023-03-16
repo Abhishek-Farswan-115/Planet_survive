@@ -227,7 +227,7 @@ transform = Transform3D(0.668055, -0.277892, -0.690274, -0.248617, -0.957697, 0.
 generation_data = SubResource("Resource_wmupd")
 
 [node name="character" parent="." instance=ExtResource("2_ti70g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.02756, 59.4784, 4.2291)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.73915, 46.2988, -5.35692)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.91778, 58.7274, -1.00027)

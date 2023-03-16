@@ -1,12 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://ckppa41lwfx6d"]
+[gd_scene load_steps=13 format=3 uid="uid://ckppa41lwfx6d"]
 
 [ext_resource type="Script" path="res://Scripts/planet/planet.gd" id="1_xgdco"]
 [ext_resource type="Script" path="res://Scripts/planet/planet_mesh.gd" id="2_3gxlj"]
 [ext_resource type="Script" path="res://Scripts/planet/planet_gravity_area.gd" id="2_bjw6l"]
 [ext_resource type="Shader" path="res://Shaders/Planet/planet_shader.gdshader" id="2_h0fdq"]
 [ext_resource type="Script" path="res://Scripts/planet/planet_atmosphere.gd" id="3_53wlp"]
-
-[sub_resource type="FogMaterial" id="FogMaterial_6jel6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_my7y2"]
 render_priority = 0
@@ -20,17 +18,17 @@ shader_parameter/roughness = 1.0
 shader_parameter/specular = 0.0
 shader_parameter/metallic = 0.0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_88nqj"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_n0aeu"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_xm78x"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_f3d8x"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_g5god"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_hddnf"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_aoekq"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_y1hlk"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_3ogn7"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_mqe22"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_7atus"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_6scod"]
 
 [node name="planet" type="Node3D"]
 script = ExtResource("1_xgdco")
@@ -43,42 +41,41 @@ gravity_direction = Vector3(0, 0, 0)
 script = ExtResource("2_bjw6l")
 
 [node name="atmosphere" type="FogVolume" parent="."]
-material = SubResource("FogMaterial_6jel6")
 script = ExtResource("3_53wlp")
 
 [node name="up" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_my7y2")
-mesh = SubResource("ArrayMesh_88nqj")
+mesh = SubResource("ArrayMesh_n0aeu")
 script = ExtResource("2_3gxlj")
 normal = Vector3(0, 1, 0)
 
 [node name="down" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_my7y2")
-mesh = SubResource("ArrayMesh_xm78x")
+mesh = SubResource("ArrayMesh_f3d8x")
 script = ExtResource("2_3gxlj")
 normal = Vector3(0, -1, 0)
 
 [node name="left" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_my7y2")
-mesh = SubResource("ArrayMesh_g5god")
+mesh = SubResource("ArrayMesh_hddnf")
 script = ExtResource("2_3gxlj")
 normal = Vector3(-1, 0, 0)
 
 [node name="right" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_my7y2")
-mesh = SubResource("ArrayMesh_aoekq")
+mesh = SubResource("ArrayMesh_y1hlk")
 script = ExtResource("2_3gxlj")
 normal = Vector3(1, 0, 0)
 
 [node name="front" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_my7y2")
-mesh = SubResource("ArrayMesh_3ogn7")
+mesh = SubResource("ArrayMesh_mqe22")
 script = ExtResource("2_3gxlj")
 normal = Vector3(0, 0, -1)
 
 [node name="back" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_my7y2")
-mesh = SubResource("ArrayMesh_7atus")
+mesh = SubResource("ArrayMesh_6scod")
 script = ExtResource("2_3gxlj")
 normal = Vector3(0, 0, 1)
 
