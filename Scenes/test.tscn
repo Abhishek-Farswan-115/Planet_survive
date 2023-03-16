@@ -1,10 +1,12 @@
-[gd_scene load_steps=39 format=3 uid="uid://b3xhbgswg12we"]
+[gd_scene load_steps=33 format=3 uid="uid://b3xhbgswg12we"]
 
 [ext_resource type="PackedScene" uid="uid://ckppa41lwfx6d" path="res://Scenes/planet.tscn" id="2_3wnba"]
+[ext_resource type="Resource" uid="uid://dgyxqc65oijho" path="res://local_test/default_planet.tres" id="2_sjtvc"]
 [ext_resource type="PackedScene" uid="uid://supstqryanb5" path="res://Scenes/character/character.tscn" id="2_ti70g"]
 [ext_resource type="Script" path="res://Scripts/planet/planet_noise_layer.gd" id="3_dakq0"]
 [ext_resource type="Script" path="res://Scripts/planet/planet_noise.gd" id="4_scv2a"]
 [ext_resource type="Script" path="res://Scripts/planet/planet_data.gd" id="5_x4a2m"]
+[ext_resource type="Script" path="res://Scripts/enemies/enemy_spawner.gd" id="7_vnejf"]
 
 [sub_resource type="Environment" id="Environment_lwrl4"]
 background_mode = 1
@@ -16,56 +18,6 @@ glow_normalized = true
 glow_bloom = 0.5
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
-
-[sub_resource type="Gradient" id="Gradient_pkmxb"]
-offsets = PackedFloat32Array(0, 0.159722, 0.243056, 0.479167, 1)
-colors = PackedColorArray(0.34375, 0.341368, 0.305018, 1, 0.310121, 0.640625, 0.198732, 1, 0.027451, 1, 0.164706, 1, 0.243137, 0.211765, 0.129412, 1, 0.243137, 0.211765, 0.129412, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_g5ioc"]
-resource_local_to_scene = true
-gradient = SubResource("Gradient_pkmxb")
-use_hdr = true
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_m5yvc"]
-frequency = 0.4
-
-[sub_resource type="Resource" id="Resource_dilg2"]
-script = ExtResource("3_dakq0")
-noise_map = SubResource("FastNoiseLite_m5yvc")
-noise_power = 0.6
-min_noise_value = 0.2
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_b856j"]
-seed = 2
-frequency = 0.5
-
-[sub_resource type="Resource" id="Resource_k7jqk"]
-script = ExtResource("3_dakq0")
-noise_map = SubResource("FastNoiseLite_b856j")
-noise_power = 1.8
-min_noise_value = 1.0
-
-[sub_resource type="Resource" id="Resource_vo2a7"]
-resource_local_to_scene = true
-script = ExtResource("4_scv2a")
-noise_layers = Array[ExtResource("3_dakq0")]([SubResource("Resource_dilg2"), SubResource("Resource_k7jqk")])
-random_noise_amount = 0.1
-
-[sub_resource type="Resource" id="Resource_wxauj"]
-resource_local_to_scene = true
-script = ExtResource("5_x4a2m")
-radius = 40.0
-gravity_radius_offset = 20.0
-resolution = 50
-noise = SubResource("Resource_vo2a7")
-height_gradient = SubResource("GradientTexture1D_g5ioc")
-slope_offset = 0.3
-slope_albedo = Color(0.411765, 0.411765, 0.411765, 1)
-atmosphere_square_size = 150.0
-atmosphere_density = 0.1
-atmosphere_curve = 1.5
-atmosphere_albedo = Color(0.431373, 0.827451, 1, 1)
-atmosphere_emission = Color(0.392157, 0.752941, 1, 1)
 
 [sub_resource type="Gradient" id="Gradient_kgam2"]
 offsets = PackedFloat32Array(0.187311, 0.441088, 0.637462, 1)
@@ -212,7 +164,7 @@ directional_shadow_split_1 = 0.4
 
 [node name="planet" parent="." instance=ExtResource("2_3wnba")]
 transform = Transform3D(-0.175298, 0.984515, 0, -0.984515, -0.175298, 0, 0, 0, 1, 0, 0, 0)
-generation_data = SubResource("Resource_wxauj")
+generation_data = ExtResource("2_sjtvc")
 
 [node name="planet3" parent="." instance=ExtResource("2_3wnba")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 62.7882, 0, 117.946)
@@ -255,3 +207,8 @@ shape = SubResource("BoxShape3D_7kec6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
 mesh = SubResource("BoxMesh_ptl4h")
+
+[node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("planet", "player")]
+script = ExtResource("7_vnejf")
+planet = NodePath("../planet")
+player = NodePath("../character")

@@ -4,11 +4,7 @@ class_name PlanetGravityArea extends Area3D
 func regenerate_gravity(gen_data: PlanetData) -> void:
 	call_deferred("_clean_gravity")
 	if gen_data:
-		var h := 0.0
-		for l in gen_data.noise.noise_layers:
-			var hl := l.noise_power - l.min_noise_value
-			h += hl
-		call_deferred("_create_gravity", gen_data.radius * h + gen_data.gravity_radius_offset)
+		call_deferred("_create_gravity", gen_data.add_height + gen_data.gravity_radius_offset)
 
 func _create_gravity(area_radius: float) -> void:
 	var col := CollisionShape3D.new()
