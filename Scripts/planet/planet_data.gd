@@ -73,6 +73,8 @@ class_name PlanetData extends Resource
 		atmosphere_emission = val
 		changed.emit()
 
+var add_height: float = 0
+
 var min_height: float = 1.79769e308
 var max_height: float = 0.0
 
@@ -91,6 +93,7 @@ func point_on_planet(point_on_sphere: Vector3) -> Vector3:
 		layer_height *= l.noise_power
 		layer_height = max(0.0, layer_height - l.min_noise_value)
 		height += layer_height
+	add_height = radius * (height +1.0)
 	return point_on_sphere * radius * (height+1.0)
 
 func apply_post_process(point: Vector3) -> Vector3:
